@@ -195,6 +195,7 @@ function sleep(ms) {
 		fetch(`https://dynamicdns.park-your-domain.com/update?host=${args['ddns-host']}&domain=${args['domain']}&password=${args['ddns-password']}&ip=${args['to']}`).catch(e => {
 			console.error(e)
 			console.error('Fallback failed!')
+			console.log('FALLBACK FAILED!!!!!!!!!!!!!!')
 			process.exit(1)
 		})
 	}
