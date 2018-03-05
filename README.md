@@ -23,7 +23,7 @@ chmod a+x run.sh
 
 ![Second step: Turn on Dynamic DNS](https://i.imgur.com/toq8v2D.jpg)
 
-![Third step: Set initial values for the A record](https://i.imgur.com/5nU9YxZ.jpg)
+![Third step: Set initial values for the A record](https://i.imgur.com/hmNAhfn.jpg)
 
 
 Follow the instructions in the screenshots. You should initially set the IP to something that's not your actual IP just to ensure the program is working on the initial run. Then execute `./run.sh` with some variables set first. You could set this up as a systemd service so that it can run on boot.
