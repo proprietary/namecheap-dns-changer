@@ -19,7 +19,7 @@ while true
 do
 	host_ip=$(get_host_ip)
 	my_ip=$(get_ip)
-	if [ host_ip != my_ip ]
+	if [ $host_ip != $my_ip ]
 	then
 		node index.js --domain=$NAMECHEAP_DOMAIN --ddns-host=$NAMECHEAP_HOST --ddns-password=$NAMECHEAP_DDNS_PASSWORD --to=$my_ip
 	fi

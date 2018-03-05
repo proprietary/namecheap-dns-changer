@@ -1,6 +1,12 @@
 # What is this for?
 
-It automatically updates a namecheap.com domain's A record to your network's actual external IP. This is useful for running a home server on an internet connection with a dynamic IP (i.e., running a server from your closet). Because namecheap's API has steep requirements to use, and their alternate method for dynamically updating an A zone messes up your TTL, I used browser automation (via Chrome Headless and Puppeteer) to just log in and change the DNS in the control panel. If namecheap changes their CSS selectors, then this won't work, but this program will fallback to namecheap's [recommended solution for changing DNS][1] (which has the side effect of changing TTL to Automatic—the whole purpose of using this program instead).
+It automatically updates a namecheap.com domain's A record to your network's actual external IP. This is useful for running a home server on an internet connection with a dynamic IP (i.e., running a server from your closet).
+
+# How does it work?
+
+Because namecheap's API isn't available to every user, and their alternate method for dynamically updating an A zone messes up your TTL, I used browser automation (via Chrome Headless and Puppeteer) to just log in and change the DNS in the control panel. This is expensive, but it only ever runs when the dynamic IP changes; for most, dynamic IPs only change a few times a year.
+
+If namecheap changes their CSS selectors, then browser automation won't work (until someone fixes the code), but this program will fallback to namecheap's [recommended solution for changing DNS][1] (which has the side effect of changing TTL to Automatic—the whole purpose of using this program instead).
 
 # Dependencies
 
@@ -8,9 +14,7 @@ It automatically updates a namecheap.com domain's A record to your network's act
 - yarn (or npm)
 - POSIX
 
-# Example usage
-
-Setup:
+# Setup
 
 ```bash
 git clone https://github.com/zerodeltasafe/namecheap-dns-changer
@@ -18,6 +22,8 @@ cd namecheap-dns-changer
 yarn install
 chmod a+x run.sh
 ```
+
+Here's how to properly set up your namecheap account for this. First [set up a "Dynamic DNS" + A record in your Advanced DNS tab][1].
 
 ![First step: Navigate to the Advanced DNS tab on namecheap](https://i.imgur.com/EIeMqVl.jpg)
 
