@@ -15,13 +15,15 @@ function get_host_ip() {
 	dig +short $NAMECHEAP_HOST.$NAMECHEAP_DOMAIN | head -n 1
 }
 
+dir_of_this_script="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" # WARNING: if this script is called a symlink, this won't work
+
 while true
 do
 	host_ip=$(get_host_ip)
 	my_ip=$(get_ip)
 	if [ $host_ip != $my_ip ]
 	then
-		node index.js --domain=$NAMECHEAP_DOMAIN --ddns-host=$NAMECHEAP_HOST --ddns-password=$NAMECHEAP_DDNS_PASSWORD --to=$my_ip
+		node $dir_of_this_script/index.js --domain=$NAMECHEAP_DOMAIN --ddns-host=$NAMECHEAP_HOST --ddns-password=$NAMECHEAP_DDNS_PASSWORD --to=$my_ip
 	fi
 	sleep 60
 done

@@ -58,13 +58,13 @@ function sleep(ms) {
 
 /* const queryVisibleSelectorAllInBrowser = (selector, pred) =>
  * 	  Array.from(document.querySelectorAll(selector)).filter(x => x.offsetParent !== null && (pred === undefined || pred(x)))
- * 
+ *
  * function truthifyArrayReturningFn(f) {
  * 	return function(...args) {
  * 		return f(...args).length > 0
  * 	}
  * }
- * 
+ *
  * async function queryVisibleSelectorAll(selector, page, pred) {
  * 	const selectors = await page.evaluateHandle((selector, pred) =>
  * 												Array.from(document.querySelectorAll(selector))
@@ -85,7 +85,7 @@ function sleep(ms) {
 
 (async () => {
 	const args = parseArgs(process.argv.slice(2))
-	
+
 	try {
 		const { NAMECHEAP_USERNAME, NAMECHEAP_PASSWORD } = process.env
 		if (NAMECHEAP_USERNAME === undefined) {
@@ -104,7 +104,15 @@ function sleep(ms) {
 			throw new Error(ERR_MISSING_FLAG)
 		}
 
-		const b = await puppeteer.launch({headless: true})
+		const b = await puppeteer.launch({
+			headless: true,
+			args: [
+				// Disabling sandbox needed for running as systemd service as root
+				// https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md
+				'--no-sandbox',
+				'--disable-setuid-sandbox'
+			]
+		})
 		const page = await b.newPage()
 		await page.setViewport({width: 1300, height: 700})
 		await page.goto(`https://ap.www.namecheap.com/Domains/DomainControlPanel/${args['domain']}/advancedns`)
@@ -176,8 +184,8 @@ function sleep(ms) {
 			await saveButton.click()
 			await sleep(5000)
 		}
-		
-		
+
+
 		await b.close()
 	} catch (e) {
 		// This will happen when namecheap changes their CSS selectors
