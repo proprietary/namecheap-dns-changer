@@ -21,7 +21,7 @@ chmod a+x run.sh
 
 ![First step: Navigate to the Advanced DNS tab on namecheap](https://i.imgur.com/EIeMqVl.jpg)
 
-![Second step: Turn on Dynamic DNS](https://i.imgur.com/MP3TBhG.jpg)
+![Second step: Turn on Dynamic DNS](https://i.imgur.com/toq8v2D.jpg)
 
 ![Third step: Set initial values for the A record](https://i.imgur.com/5nU9YxZ.jpg)
 
