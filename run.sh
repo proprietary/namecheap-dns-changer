@@ -24,6 +24,7 @@ do
 	my_ip=$(get_ip)
 	if [ $host_ip != $my_ip ]
 	then
+		echo IP: $my_ip, host IP: $host_ip
 		node $dir_of_this_script/index.js --domain=$NAMECHEAP_DOMAIN --ddns-host=$NAMECHEAP_HOST --ddns-password=$NAMECHEAP_DDNS_PASSWORD --to=$my_ip
 		host_ip=$(get_host_ip)
 	fi
