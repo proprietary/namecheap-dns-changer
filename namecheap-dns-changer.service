@@ -1,0 +1,16 @@
+[Unit]
+Description=Automatically updates an A record on a namecheap.com domain to the current IP
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+Environment="NAMECHEAP_USERNAME=my_username_obviously_change_this"
+Environment="NAMECHEAP_PASSWORD=*******obviously change this********"
+Environment="NAMECHEAP_DOMAIN=example.com"
+Environment="NAMECHEAP_HOST=my"
+Environment="NAMECHEAP_DDNS_PASSWORD=9a16830f06be49aldsk3909d02bd61896acdb9"
+ExecStart=/home/me/namecheap-dns-changer/run.sh
+
+[Install]
+WantedBy=multi-user.target

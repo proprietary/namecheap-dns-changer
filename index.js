@@ -136,6 +136,13 @@ function sleep(ms) {
 			args['ddns-host']
 		)
 		const oldIPValue = await oldIPValueHandle.jsonValue()
+		if ((oldIPValue + '').includes(args['to'])) {
+			// Short circuit out if this is actually the IP
+			// implying DNS lag time caused false positive in run.sh script
+			await b.close()
+			// console.log('has target IP already')
+			process.exit(0)
+		}
 		// Now just change every reference to that IP
 		// (In case there are duplicate DNS zones with the same IP. Why should you ever use an invalid IP? Just makes sense.)
 		const oldIPButtonsArrayHandle = await page.evaluateHandle(
