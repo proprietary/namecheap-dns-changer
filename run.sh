@@ -12,7 +12,7 @@ function get_ip() {
 }
 
 function get_host_ip() {
-	dig +short $NAMECHEAP_HOST.$NAMECHEAP_DOMAIN
+	dig +short $NAMECHEAP_HOST.$NAMECHEAP_DOMAIN | head -n 1
 }
 
 while true
